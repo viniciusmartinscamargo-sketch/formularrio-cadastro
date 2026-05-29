@@ -36,23 +36,27 @@
       const complemento1 = document.getElementById("complemento1").value;
       const telefone2 = document.getElementById("telefone2").value;
       const complemento2 = document.getElementById("complemento2").value;
+      const celular = document.getElementById("complemento3").value;
       const complemento3 = document.getElementById("complemento3").value;
       const fax = document.getElementById("fax").value;
       const complemento4 = document.getElementById("complemento4").value;
     
       try {
-        await addDoc(collection(db, "usuarios"), {
-          nome,
+        await addDoc(collection(db, "endereco"), {
           cep,
-          cpf,
-          data_nascimento,
-          email,
-          foto,
-          idade,
-          rg,
-          senha,
-          telefone
-        });
+          endereco,
+          complemento,
+          bairro,
+          cidade,
+          telefone1,
+          complemento1,
+          telefone2,
+          complemento2,
+          celular,
+          complemento3,
+          fax,
+          complemento4
+              });
 
         mensagem.textContent = "Usuário salvo com sucesso.";
         mensagem.style.color = "green";
