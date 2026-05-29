@@ -1,7 +1,34 @@
 <!DOCTYPE html>
-<html lang="PT-BR">
-<head>
-    <script type="module">
+  <html lang="PT-BR">
+      <head>
+          <style>
+              .texto{
+                color: red;
+              }
+              .campo{
+                border:1px solid red;
+              }
+              fieldset{
+                border:1px solid red;
+                background-color: rgb(225, 194, 176);
+                width:200px;
+                margin-left: 750px;
+                margin-top: 50px;
+              }
+              legend{
+                color: red;
+              }
+              .botao{
+                background-color: green;
+                color: white;
+              }
+              body{
+                background-image: url("https://thecrookedpen.com/wp-content/uploads/2018/01/tumblr_o8muyedji61vp6xwko1_500.gif");
+                background-repeat: no-repeat;
+                background-size: cover;
+              }
+          </style>
+        <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import {
       getFirestore,
@@ -27,36 +54,30 @@
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
+      const nome = document.getElementById("nome").value;
       const cep = document.getElementById("cep").value;
-      const endereco = document.getElementById("endereco").value;
-      const complemento = document.getElementById("complemento").value;
-      const bairro = document.getElementById("bairro").value;
-      const cidade = document.getElementById("cidade").value;
-      const telefone1 = document.getElementById("telefone1").value;
-      const complemento1 = document.getElementById("complemento1").value;
-      const telefone2 = document.getElementById("telefone2").value;
-      const complemento2 = document.getElementById("complemento2").value;
-      const celular = document.getElementById("complemento3").value;
-      const complemento3 = document.getElementById("complemento3").value;
-      const fax = document.getElementById("fax").value;
-      const complemento4 = document.getElementById("complemento4").value;
-    
+      const cpf = document.getElementById("cpf").value;
+      const data_nascimento = document.getElementById("data_nascimento").value;
+      const email = document.getElementById("email").value;
+      const foto = document.getElementById("foto").value;
+      const idade = document.getElementById("idade").value;
+      const rg = document.getElementById("rg").value;
+      const senha = document.getElementById("senha").value;
+      const telefone = document.getElementById("telefone").value;
+
       try {
-        await addDoc(collection(db, "endereco"), {
+        await addDoc(collection(db, "usuarios"), {
+          nome,
           cep,
-          endereco,
-          complemento,
-          bairro,
-          cidade,
-          telefone1,
-          complemento1,
-          telefone2,
-          complemento2,
-          celular,
-          complemento3,
-          fax,
-          complemento4
-              });
+          cpf,
+          data_nascimento,
+          email,
+          foto,
+          idade,
+          rg,
+          senha,
+          telefone
+        });
 
         mensagem.textContent = "Usuário salvo com sucesso.";
         mensagem.style.color = "green";
@@ -67,40 +88,23 @@
       }
     });
   </script>
-    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>oi
-    <fieldset>
-        <legend>endereço</legend>
-
-<form id="formulario">
-        
-        <p>CEP<input id="cep" type="text"></p>
-
-        <p>endereço<input id="endereco" type="text"></p>
-
-        <p>complemento<input id="complemento" type="text">
-        bairro<input id="bairro" type="text"></p>
-
-        <p>cidade<input id="cidade" type="text"></p>
-        
-        <p>telefone 1<input id="telefone1" type="text">
-        complemento 1<input id="complemento1" type="text"></p>
-
-        <p>telefone 2<input id="telefone2" type="text">
-        complemento 2<input id="complemento2" type="text"></p>  
-
-        <p>celular<input id="celular" type="text">
-        complemento 3<input id="complemento3" type="text"></p>
-
-        <p>Fax<input id="fax" class="" type="text">
-           complemento 4<input id="complemento4" type="text"></p>
-            <input type="submit" value="cadastrar">
-
-            </form>
-    </fieldset>
-</body>
-    
-</html>
+      </head>
+      <body>
+          <form id="formulario">
+                <fieldset>
+                    <legend>CADASTRO DE USUARIOS</legend>
+                    <p class="texto">NOME COMPLETO:</p> <input type="text"  id="nome" class="campo" placeholder="Nome de usuario" minlength="10" maxlength="20" id="nome" class="nome" name="nome" required><br>
+                    <p class="texto">CEP:</p> <input type="text" id="cep" class="campo" placeholder="Nome de usuario" minlength="10" maxlength="20" id="nome" class="nome" name="nome" required><br>
+                    <p class="texto">CPF:</p> <input type="text" id="cpf" class="campo" placeholder="Nome de usuario" minlength="10" maxlength="20" id="nome" class="nome" name="nome" required><br>
+                    <p class="texto">DATA DE NASCIMENTO:</p> <input type="text" id="data_nascimento" class="campo" placeholder="Nome de usuario" minlength="10" maxlength="20" id="nome" class="nome" name="nome" required><br>
+                    <p class="texto">EMAIL:</p> <input type="text" id="email" class="campo" placeholder="Nome de usuario" minlength="10" maxlength="20" id="nome" class="nome" name="nome" required><br>
+                    <p class="texto">FOTO:</p> <input type="text" id="foto" class="campo" placeholder="Nome de usuario" minlength="10" maxlength="20" id="nome" class="nome" name="nome" required><br>
+                    <p class="texto">IDADE:</p> <input type="text" id="idade" class="campo" placeholder="Nome de usuario" minlength="10" maxlength="20" id="nome" class="nome" name="nome" required><br>
+                    <p class="texto">RG:</p> <input type="text" id="rg" class="campo" placeholder="Nome de usuario" minlength="10" maxlength="20" id="nome" class="nome" name="nome" required><br>
+                    <p class="texto">SENHA:</p> <input type="text" id="senha" class="campo" placeholder="Nome de usuario" minlength="10" maxlength="20" id="nome" class="nome" name="nome" required><br>
+                    <p class="texto">TELEFONE:</p> <input type="text" id="telefone" class="campo" placeholder="Nome de usuario" minlength="10" maxlength="20" id="nome" class="nome" name="nome" required><br>
+                    <input type="submit" value="Cadastrar">
+                </fieldset>
+          </form>
+      </body>
+  </html>
