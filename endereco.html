@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import {
+      getFirestore,
+      collection,
+      addDoc
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+       apiKey: "AIzaSyAUqMiMEgokg1HKorpP4ibt9MlldJR-yYw",
+  authDomain: "c-oficial-1df7d.firebaseapp.com",
+  projectId: "c-oficial-1df7d",
+  storageBucket: "c-oficial-1df7d.firebasestorage.app",
+  messagingSenderId: "81997680555",
+  appId: "1:81997680555:web:189b9a910471c83a034cee"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const form = document.getElementById("formulario");
+    const mensagem = document.getElementById("mensagem");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const cep = document.getElementById("cep").value;
+      const endereco = document.getElementById("endereco").value;
+      const complemento = document.getElementById("complemento").value;
+      const bairro = document.getElementById("bairro").value;
+      const cidade = document.getElementById("cidade").value;
+      const telefone1 = document.getElementById("telefone1").value;
+      const complemento1 = document.getElementById("complemento1").value;
+      const telefone2 = document.getElementById("telefone2").value;
+      const complemento2 = document.getElementById("complemento2").value;
+      const celular = document.getElementById("celular").value;
+      const complemento3 = document.getElementById("complemento3").value;
+      const fax = document.getElementById("complemento2").value;
+      const complemento4 = document.getElementById("complemento4").value;
+
+      try {
+        await addDoc(collection(db, "endereco"), {
+          cep,
+          endereco,
+          complemento,
+          bairro,
+          cidade,
+          telefone1,
+          complemento1,
+          telefone2,
+          complemento2,
+          celular,
+          complemento3,
+          fax,
+          complemento4
+        });
+
+        mensagem.textContent = "Usuário salvo com sucesso.";
+        mensagem.style.color = "green";
+        form.reset();
+      } catch (error) {
+        mensagem.textContent = "Erro ao salvar: " + error.message;
+        mensagem.style.color = "red";
+      }
+    });
+  </script>
+</head>
+<body>
+    <fieldset>
+        <legend>endereço</legend>
+        <form id="formulario">
+        <p>CEP<input id="cep" type="text"></p>
+
+        <p>endereço<input id="endereco" type="text"></p>
+
+        <p>complemento<input id="complemento" type="text">
+        bairro<input id="bairro" type="text"></p>
+
+        <p>cidade<input id="cidade" type="text"></p>
+        
+        <p>telefone 1<input id="telefone1" type="text">
+        complemento 1<input id="complemento1" type="text"></p>
+
+        <p>telefone 2<input id="telefone2" type="text">
+        complemento 2<input id="complemento2" type="text"></p>  
+
+        <p>celular<input id="celular" type="text">
+        complemento 3<input id="complemento3" type="text"></p>
+
+        <p>Fax<input id="fax" class="" type="text">
+        complemento 4<input id="complemento4" type="text"></p>
+        <br><br>
+        <input type="submit" value="Cadastrar">
+        </form>
+    </fieldset>
+</body>
+</html>
