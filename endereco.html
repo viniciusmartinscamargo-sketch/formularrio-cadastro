@@ -1,6 +1,67 @@
 <!DOCTYPE html>
 <html lang="PT-BR">
 <head>
+    <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import {
+      getFirestore,
+      collection,
+      addDoc
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+       apiKey: "AIzaSyAUqMiMEgokg1HKorpP4ibt9MlldJR-yYw",
+  authDomain: "c-oficial-1df7d.firebaseapp.com",
+  projectId: "c-oficial-1df7d",
+  storageBucket: "c-oficial-1df7d.firebasestorage.app",
+  messagingSenderId: "81997680555",
+  appId: "1:81997680555:web:189b9a910471c83a034cee"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const form = document.getElementById("formulario");
+    const mensagem = document.getElementById("mensagem");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const nome = document.getElementById("nome").value;
+      const cep = document.getElementById("cep").value;
+      const cpf = document.getElementById("cpf").value;
+      const data_nascimento = document.getElementById("data_nascimento").value;
+      const email = document.getElementById("email").value;
+      const foto = document.getElementById("foto").value;
+      const idade = document.getElementById("idade").value;
+      const rg = document.getElementById("rg").value;
+      const senha = document.getElementById("senha").value;
+      const telefone = document.getElementById("telefone").value;
+
+      try {
+        await addDoc(collection(db, "usuarios"), {
+          nome,
+          cep,
+          cpf,
+          data_nascimento,
+          email,
+          foto,
+          idade,
+          rg,
+          senha,
+          telefone
+        });
+
+        mensagem.textContent = "Usuário salvo com sucesso.";
+        mensagem.style.color = "green";
+        form.reset();
+      } catch (error) {
+        mensagem.textContent = "Erro ao salvar: " + error.message;
+        mensagem.style.color = "red";
+      }
+    });
+  </script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -35,4 +96,5 @@
             </form>
     </fieldset>
 </body>
+    
 </html>
